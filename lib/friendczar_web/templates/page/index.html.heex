@@ -23,7 +23,7 @@
     <ul>
      <%= for user <- @users do %>
       <li>
-        <%= link user.email , to: Routes.live_path(@conn, FriendczarWeb.UserLive, user) %>
+        <%= link user.email , to: Routes.live_path(@conn, FriendczarWeb.RoomLive, user) %>
       </li>
      <% end %>
       

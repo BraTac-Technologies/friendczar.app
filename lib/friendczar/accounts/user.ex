@@ -32,7 +32,7 @@ defmodule Friendczar.Accounts.User do
   def registration_changeset(user, attrs, opts \\ []) do
     user
     |> cast(attrs, [:email, :password, :name])
-    |> validate_name()
+    # |> validate_name()
     |> validate_email()
     |> validate_password(opts)
   end

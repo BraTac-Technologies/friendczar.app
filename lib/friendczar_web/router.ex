@@ -22,7 +22,7 @@ defmodule FriendczarWeb.Router do
 
     get "/", PageController, :index
     get "/user", PageController, :user
-    live "/user_live/:id", UserLive
+    live "/user_live/:id", RoomLive
   end
 
   # Other scopes may use custom stacks.
