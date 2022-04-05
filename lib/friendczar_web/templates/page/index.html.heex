@@ -19,23 +19,14 @@
     </ul>
   </article>
   <article class="column">
-    <h2>Help</h2>
+    <h2>Users</h2>
     <ul>
+     <%= for user <- @users do %>
       <li>
-        <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
+        <%= link user.email , to: Routes.live_path(@conn, FriendczarWeb.UserLive, user) %>
       </li>
-      <li>
-        <a href="https://web.libera.chat/#elixir">#elixir on Libera Chat (IRC)</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
-      </li>
-      <li>
-        <a href="https://elixir-slackin.herokuapp.com/">Elixir on Slack</a>
-      </li>
-      <li>
-        <a href="https://discord.gg/elixir">Elixir on Discord</a>
-      </li>
+     <% end %>
+      
     </ul>
   </article>
 </section>

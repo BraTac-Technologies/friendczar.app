@@ -21,6 +21,8 @@ defmodule FriendczarWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/user", PageController, :user
+    live "/user_live/:id", UserLive
   end
 
   # Other scopes may use custom stacks.

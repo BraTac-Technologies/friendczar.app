@@ -10,6 +10,7 @@ defmodule FriendczarWeb.UserSettingsController do
     render(conn, "edit.html")
   end
 
+
   def update(conn, %{"action" => "update_email"} = params) do
     %{"current_password" => password, "user" => user_params} = params
     user = conn.assigns.current_user
