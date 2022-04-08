@@ -21,6 +21,14 @@ defmodule Friendczar.Messages do
     Repo.all(Message)
   end
 
+  def list_messages_by_users(current_user, selected_user) do
+    ci = current_user.id
+    si = selected_user.id
+
+    query = from(m in Message, where: (m.current_user_id == ^ci or m.current_user_id == ^si) and (m.selected_user_id == ^si or m.selected_user_id ==^ci))
+    Repo.all(query)
+  end
+
   @doc """
   Gets a single message.
 

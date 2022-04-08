@@ -4,6 +4,12 @@
   <p>current_user: <%= @current_user.email %> (<%= @current_user.id %>)</p>
 </section>
 
+<%= for message <- @messages do %>
+  <p><b><%= message.current_user.email %></b> : <%= message.message %> </p>
+  <br>
+<% end %>  
+
+
 <.form let={f} for={@changeset_for_message}, phx-submit="send_message">
 
 <%= hidden_input f, :current_user_id, value: @current_user.id %>

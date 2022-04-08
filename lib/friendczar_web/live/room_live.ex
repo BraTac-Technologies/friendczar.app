@@ -1,7 +1,7 @@
 defmodule FriendczarWeb.RoomLive do
   use FriendczarWeb, :live_view
 
-  alias FriendczarWeb.Repo
+  alias Friendczar.Repo
   alias FriendczarWeb.ChatView
   alias Friendczar.Accounts
   alias Friendczar.Messages
@@ -18,10 +18,12 @@ defmodule FriendczarWeb.RoomLive do
     current_user_token = session["user_token"]
     current_user = Accounts.get_user_by_session_token(current_user_token)
     changeset_for_message = Messages.change_message(%Message{})
+    messages = Messages.list_messages_by_users(current_user, selected_user) |> Repo.preload(:current_user)
     socket = assign(
         socket,
         selected_user: selected_user,
         current_user: current_user,
+        messages: messages,
         changeset_for_message: changeset_for_message
       )
     {:ok, socket}
