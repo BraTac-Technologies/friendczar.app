@@ -54,9 +54,12 @@ defmodule FriendczarWeb.RoomLive do
       update(
         socket,
         :messages,
-        fn messages -> [message | messages] end
+        fn messages -> [message | messages] |> Repo.preload(:current_user) end
       )
+
     {:noreply, socket}
   end
+
+
 
 end
