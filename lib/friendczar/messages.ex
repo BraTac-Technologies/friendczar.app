@@ -17,6 +17,11 @@ defmodule Friendczar.Messages do
       [%Message{}, ...]
 
   """
+  def subscribe do
+    Phoenix.PubSub.subscribe(Friendczar.PubSub, "messages")
+  end
+
+
   def list_messages do
     Repo.all(Message)
   end
@@ -61,7 +66,24 @@ defmodule Friendczar.Messages do
     %Message{}
     |> Message.changeset(attrs)
     |> Repo.insert()
+    |> broadcast(:message_created)
+
   end
+
+  def broadcast({:ok, message}, event) do
+
+    Phoenix.PubSub.broadcast(
+      Friendczar.PubSub,
+      "messages",
+      {event, message}
+    )
+    {:ok, message}
+  end
+
+  def broadcast({:error, _reason} = error, _event), do: error
+
+
+
 
   @doc """
   Updates a message.

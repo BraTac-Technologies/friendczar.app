@@ -14,6 +14,7 @@ defmodule FriendczarWeb.RoomLive do
 
 
   def mount(params, session, socket) do
+    if connected?(socket), do: Messages.subscribe()
     selected_user = Accounts.get_user!(params["id"])
     current_user_token = session["user_token"]
     current_user = Accounts.get_user_by_session_token(current_user_token)
@@ -46,7 +47,16 @@ defmodule FriendczarWeb.RoomLive do
 
       end
 
+  end
 
+  def handle_info({:message_created, message}, socket) do
+    socket =
+      update(
+        socket,
+        :messages,
+        fn messages -> [message | messages] end
+      )
+    {:noreply, socket}
   end
 
 end
