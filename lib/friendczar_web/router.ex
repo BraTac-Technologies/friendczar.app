@@ -22,7 +22,6 @@ defmodule FriendczarWeb.Router do
 
     get "/", PageController, :index
     get "/user", PageController, :user
-    live "/user_live/:id", RoomLive
   end
 
   # Other scopes may use custom stacks.
@@ -80,6 +79,7 @@ defmodule FriendczarWeb.Router do
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
+    live "/room/:id", RoomLive
   end
 
   scope "/", FriendczarWeb do

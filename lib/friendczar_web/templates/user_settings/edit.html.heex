@@ -1,6 +1,6 @@
 <h1>Settings</h1>
 
-<h3>Change email</h3>
+<h3>Change name</h3>
 
 <.form let={f} for={@email_changeset} action={Routes.user_settings_path(@conn, :update)} id="update_email">
   <%= if @email_changeset.action do %>
@@ -11,7 +11,8 @@
 
   <%= hidden_input f, :action, name: "action", value: "update_email" %>
 
-  <%= label f, :email %>
+  <%# label f, :email %>
+  <label>New name</label>
   <%= email_input f, :email, required: true %>
   <%= error_tag f, :email %>
 
@@ -20,7 +21,7 @@
   <%= error_tag f, :current_password %>
 
   <div>
-    <%= submit "Change email" %>
+    <%= submit "Change name" %>
   </div>
 </.form>
 
