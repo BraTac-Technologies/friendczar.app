@@ -25,7 +25,8 @@ config :friendczar, FriendczarWeb.Endpoint,
   secret_key_base: "plxVfpdcGejvH2qjj9l8t+iceVWj/Gk3rCLIvi4ZuyNZvi8HB38Q7j6o+Jnl7kiX",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
 # ## SSL Support
