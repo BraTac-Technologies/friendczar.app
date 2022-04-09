@@ -1,22 +1,110 @@
-<section class="phx-hero">
-  <h1>Hello World</h1>  
-  <p>selected_user: <%= @selected_user.email %> (<%= @selected_user.id %>)</p>
-  <p>current_user: <%= @current_user.email %> (<%= @current_user.id %>)</p>
-</section>
+
+<!--
 
 <%= for message <- @messages do %>
   <p><b><%= message.current_user.email %></b> : <%= message.message %> </p>
   <br>
 <% end %>  
 
-
+-->
+<!--
 <.form let={f} for={@changeset_for_message}, phx-submit="send_message">
 
-<%= hidden_input f, :current_user_id, value: @current_user.id %>
-<%= hidden_input f, :selected_user_id, value: @selected_user.id %>
+<%# hidden_input f, :current_user_id, value: @current_user.id %>
+<%# hidden_input f, :selected_user_id, value: @selected_user.id %>
 
-<%= text_input f, :message %>
+<%# text_input f, :message %>
 
-<%= submit "Send!" %>
+<%# submit "Send!" %>
 
 </.form>
+-->
+
+<div class="hidden lg:col-span-2 lg:block">
+          <div class="w-full">
+            <div class="relative flex items-center p-3 border-b border-gray-300">
+              <img class="object-cover w-10 h-10 rounded-full"
+                src="https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg" alt="username" />
+              <span class="block ml-2 font-bold text-gray-600"><%= @selected_user.email %></span>
+              <span class="absolute w-3 h-3 bg-green-600 rounded-full left-10 top-3">
+              </span>
+            </div>
+            <div class="relative w-full p-6 overflow-y-auto h-[40rem]">
+              <ul class="space-y-2">
+                <%= for message <- @messages do %>
+                  <%= if message.current_user.id == @selected_user.id do %>
+                  <li class="flex justify-start">
+                    <div class="relative max-w-xl px-4 py-2 text-gray-700 rounded shadow">
+                      <span class="block"><%= message.message %></span>
+                    </div>
+                  </li>
+                  <% end %>
+                  <%= if message.current_user.id == @current_user.id do %>
+                  <li class="flex justify-end">
+                    <div class="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
+                      <span class="block"><%= message.message %></span>
+                    </div>
+                  </li>
+                  <% end %>
+                <% end %>
+                <!--
+                <li class="flex justify-end">
+                  <div class="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
+                    <span class="block">Hiiii</span>
+                  </div>
+                </li>
+                <li class="flex justify-end">
+                  <div class="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
+                    <span class="block">how are you?</span>
+                  </div>
+                </li>
+                -->
+               
+              </ul>
+            </div>
+
+            <div class="flex items-center justify-between w-full p-3 border-t border-gray-300">
+              <!--
+              <button>
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-500" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </button>
+              <button>
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                </svg>
+              </button>
+              -->
+
+<!--
+<.form let={f} for={@changeset_for_message}, phx-submit="send_message">
+
+<%# hidden_input f, :current_user_id, value: @current_user.id %>
+<%# hidden_input f, :selected_user_id, value: @selected_user.id %>
+
+<%# text_input f, :message %>
+
+<%# submit "Send!" %>
+
+</.form>
+-->
+
+            <.form let={f} for={@changeset_for_message}, phx-submit="send_message">
+                
+                <%= hidden_input f, :current_user_id, value: @current_user.id %>
+                <%= hidden_input f, :selected_user_id, value: @selected_user.id %>
+
+              <%= text_input f, :message, class: "block w-full py-2 pl-4 mx-3 bg-gray-100 rounded-full outline-none focus:text-gray-700", placeholder: "write here" %>
+
+             <%= submit "Send!" %>
+          
+
+            </.form>  
+            </div>
+          </div>
+        </div>
