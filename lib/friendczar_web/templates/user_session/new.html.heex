@@ -1,3 +1,4 @@
+<!--
 <h1>Log in</h1>
 
 <.form let={f} for={@conn} action={Routes.user_session_path(@conn, :create)} as={:user}>
@@ -7,17 +8,17 @@
     </div>
   <% end %>
 
-  <%= label f, :email %>
-  <%= email_input f, :email, required: true %>
+  <%# label f, :email %>
+  <%# email_input f, :email, required: true %>
 
-  <%= label f, :password %>
-  <%= password_input f, :password, required: true %>
+  <%# label f, :password %>
+  <%# password_input f, :password, required: true %>
 
-  <%= label f, :remember_me, "Keep me logged in for 60 days" %>
-  <%= checkbox f, :remember_me %>
+  <%# label f, :remember_me, "Keep me logged in for 60 days" %>
+  <%# checkbox f, :remember_me %>
 
   <div>
-    <%= submit "Log in" %>
+    <%# submit "Log in" %>
   </div>
 </.form>
 
@@ -25,3 +26,40 @@
   <%= link "Register", to: Routes.user_registration_path(@conn, :new) %> |
   <%= link "Forgot your password?", to: Routes.user_reset_password_path(@conn, :new) %>
 </p>
+-->
+ 
+
+<body class="h-screen overflow-hidden flex items-center justify-center" style="background: #14171A;">
+    <div class="p-20 h-screen w-screen flex flex-col-reverse md:flex-row items-center justify-center bg-gradient-to-t from-gray-700 via-gray-900 to-black">
+  <div class="content text-3xl text-center md:text-left">
+    <h1 class="text-6xl text-white font-bold">Friendczar<span class="text-3xl"> .app</span></h1>
+    <br>
+    <p class="text-white">Chat slogan chat chat chat slogan!</p>
+  </div>
+  <div class="container mx-auto flex flex-col items-center">
+    <form class="shadow-2xl w-80 p-4 flex flex-col bg-gradient-to-t from-gray-700 via-gray-900 to-black rounded-lg">
+      <input type="text" placeholder="Email or Phone Number" class="mb-3 py-3 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-cyan-500" />
+      <input type="text" placeholder="Pasword" class="mb-3 py-3 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-cyan-500" />
+      <button class="w-full bg-blue-500 text-white p-3 rounded-lg font-semibold text-lg">Login</button>
+      
+      <!-- <a class="text-blue-400 text-center my-2">Forgot Pasword?</a> -->
+      <!-- <hr /> -->
+      <button class="w-full bg-cyan-900 mt-8 mb-4 text-white p-3 rounded-lg font-semibold text-lg">Create New Account</button>
+    </form>
+    <p class="text-center text-white text-sm my-4">
+      <span class="font-semibold text-center text-white w-full">Copyright 2022</span> | Friendczar.app
+    </p>
+  </div>
+</div>
+</body>
+
+
+
+
+<script>
+ 
+  var x = document.getElementById("user_body");
+  x.classList.add("hidden");
+  var y = document.getElementById("chat_alligment");
+  y.classList.remove("min-w-full", "border", "rounded", "lg:grid", "lg:grid-cols-[400px,1fr]");
+</script>
