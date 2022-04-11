@@ -27,12 +27,23 @@
 
 <body>
     <div class="">
-      <div class="min-w-full border rounded lg:grid lg:grid-cols-[400px,1fr]">
+      <div id="chat_alligment" class="min-w-full border rounded lg:grid lg:grid-cols-[400px,1fr]">
 
       <!-- -->
 
-        <div class="border-r border-gray-300 lg:col-span-1">
-          <div class="mx-3 my-3">
+        <div id="user_body" class="border-r border-gray-300 lg:col-span-1">        
+        <ul>
+        <%= if @current_user do %>
+          <li><%= @current_user.email %></li>
+          <li><%= link "Settings", to: Routes.user_settings_path(@conn, :edit) %></li>
+          <li><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>
+        <% else %>
+          <li><%= link "Register", to: Routes.user_registration_path(@conn, :new) %></li>
+          <li><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></li>
+        <% end %>
+        </ul>
+
+          <div class="mx-3 my-3">          
             <div class="relative text-gray-600">
               <span class="absolute inset-y-0 left-0 flex items-center pl-2">
                 <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
