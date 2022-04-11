@@ -20,7 +20,7 @@ defmodule FriendczarWeb.Router do
   scope "/", FriendczarWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+
     get "/user", PageController, :user
   end
 
@@ -80,6 +80,7 @@ defmodule FriendczarWeb.Router do
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
     live "/room/:id", RoomLive
+    get "/", PageController, :index
   end
 
   scope "/", FriendczarWeb do
