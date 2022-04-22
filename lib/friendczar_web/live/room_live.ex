@@ -52,15 +52,16 @@ defmodule FriendczarWeb.RoomLive do
   end
 
   def handle_info({:message_created, message}, socket) do
-    socket =
-      update(
-        socket,
-        :messages,
-        fn messages -> [message | messages] |> Repo.preload(:current_user) end
-      )
+    messages = socket.assigns[:messages] || []
+      socket =
+        update(
+          socket,
+          :messages,
+          fn messages -> messages ++ [message] end
+        )
 
-    {:noreply, socket}
-  end
+      {:noreply, socket}
+    end
 
 
 

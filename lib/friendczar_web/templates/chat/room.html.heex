@@ -1,25 +1,3 @@
-
-<!--
-
-<%= for message <- @messages do %>
-  <p><b><%= message.current_user.email %></b> : <%= message.message %> </p>
-  <br>
-<% end %>  
-
--->
-<!--
-<.form let={f} for={@changeset_for_message}, phx-submit="send_message">
-
-<%# hidden_input f, :current_user_id, value: @current_user.id %>
-<%# hidden_input f, :selected_user_id, value: @selected_user.id %>
-
-<%# text_input f, :message %>
-
-<%# submit "Send!" %>
-
-</.form>
--->
-
 <div class="hidden lg:col-span-2 lg:block">
           <div class="w-full">
             <div class="relative flex items-center p-3 border-b border-gray-300">
@@ -31,22 +9,22 @@
             </div>
             <div class="relative w-full p-6 overflow-y-auto h-[40rem]">
               <ul class="space-y-2">
-                <%= for message <- @messages do %>
-                  <%= if message.current_user.id == @selected_user.id do %>
+                <%= @messages |> Enum.with_index |> Enum.map(fn({message, index}) ->  %>
+                  <%= if message.current_user_id == @selected_user.id do %>
                   <li class="flex justify-start">
                     <div class="relative max-w-xl px-4 py-2 text-gray-700 rounded shadow">
-                      <span class="block"><%= message.message %></span>
+                      <span class="block"><%= message.message %> - (<%= index %>)</span>
                     </div>
                   </li>
                   <% end %>
-                  <%= if message.current_user.id == @current_user.id do %>
+                  <%= if message.current_user_id == @current_user.id do %>
                   <li class="flex justify-end">
                     <div class="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
-                      <span class="block"><%= message.message %></span>
+                      <span class="block"><%= message.message %> - (<%= index %>)</span>
                     </div>
                   </li>
                   <% end %>
-                <% end %>
+                <% end) %>
                 <!--
                 <li class="flex justify-end">
                   <div class="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
