@@ -5,7 +5,8 @@ defmodule FriendczarWeb.UserSessionController do
   alias FriendczarWeb.UserAuth
 
   def new(conn, _params) do
-    render(conn, "new.html", error_message: nil)
+    users = Accounts.list_users()
+    render(conn, "new.html", error_message: nil, users: users)
   end
 
   def create(conn, %{"user" => user_params}) do

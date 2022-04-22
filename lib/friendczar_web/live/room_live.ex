@@ -20,11 +20,13 @@ defmodule FriendczarWeb.RoomLive do
     current_user = Accounts.get_user_by_session_token(current_user_token)
     changeset_for_message = Messages.change_message(%Message{})
     messages = Messages.list_messages_by_users(current_user, selected_user) |> Repo.preload(:current_user)
+    users = Accounts.list_users()
     socket = assign(
         socket,
         selected_user: selected_user,
         current_user: current_user,
         messages: messages,
+        users: users,
         changeset_for_message: changeset_for_message
       )
     {:ok, socket}
@@ -50,15 +52,16 @@ defmodule FriendczarWeb.RoomLive do
   end
 
   def handle_info({:message_created, message}, socket) do
-    socket =
-      update(
-        socket,
-        :messages,
-        fn messages -> [message | messages] |> Repo.preload(:current_user) end
-      )
+    messages = socket.assigns[:messages] || []
+      socket =
+        update(
+          socket,
+          :messages,
+          fn messages -> messages ++ [message] end
+        )
 
-    {:noreply, socket}
-  end
+      {:noreply, socket}
+    end
 
 
 
