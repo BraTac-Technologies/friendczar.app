@@ -7,7 +7,8 @@ defmodule FriendczarWeb.UserRegistrationController do
 
   def new(conn, _params) do
     changeset = Accounts.change_user_registration(%User{})
-    render(conn, "new.html", changeset: changeset)
+    users = Accounts.list_users()
+    render(conn, "new.html", changeset: changeset, users: users)
   end
 
   def create(conn, %{"user" => user_params}) do
