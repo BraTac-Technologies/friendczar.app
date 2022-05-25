@@ -7,13 +7,15 @@ defmodule FriendczarWeb.UserSettingsController do
   plug :assign_email_and_password_changesets
 
   def edit(conn, _params) do
-    render(conn, "edit.html")
+    users = Accounts.list_users()
+    render(conn, "edit.html", users: users)
   end
 
 
   def update(conn, %{"action" => "update_email"} = params) do
     %{"current_password" => password, "user" => user_params} = params
     user = conn.assigns.current_user
+    users = Accounts.list_users()
 
     case Accounts.apply_user_email(user, password, user_params) do
       {:ok, applied_user} ->
@@ -31,13 +33,14 @@ defmodule FriendczarWeb.UserSettingsController do
         |> redirect(to: Routes.user_settings_path(conn, :edit))
 
       {:error, changeset} ->
-        render(conn, "edit.html", email_changeset: changeset)
+        render(conn, "edit.html", email_changeset: changeset, users: users)
     end
   end
 
   def update(conn, %{"action" => "update_password"} = params) do
     %{"current_password" => password, "user" => user_params} = params
     user = conn.assigns.current_user
+    users = Accounts.list_users()
 
     case Accounts.update_user_password(user, password, user_params) do
       {:ok, user} ->
@@ -47,7 +50,7 @@ defmodule FriendczarWeb.UserSettingsController do
         |> UserAuth.log_in_user(user)
 
       {:error, changeset} ->
-        render(conn, "edit.html", password_changeset: changeset)
+        render(conn, "edit.html", password_changeset: changeset, users: users)
     end
   end
 
